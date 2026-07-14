@@ -54,8 +54,37 @@
     return Promise.resolve(fallbackCopy(text));
   }
 
+  function bindTap(element, handler) {
+    if (!element) {
+      return;
+    }
+
+    var lastTap = 0;
+
+    function activate(event) {
+      if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+
+      if (event.type === "keydown") {
+        event.preventDefault();
+      }
+
+      var now = Date.now();
+      if (now - lastTap < 350) {
+        return;
+      }
+
+      lastTap = now;
+      handler(event);
+    }
+
+    element.addEventListener("pointerup", activate);
+    element.addEventListener("keydown", activate);
+  }
+
   document.querySelectorAll("[data-copy]").forEach(function (trigger) {
-    trigger.addEventListener("click", function () {
+    bindTap(trigger, function () {
       var targetId = trigger.getAttribute("data-copy");
       var target = document.getElementById(targetId);
 
@@ -89,19 +118,15 @@
   var qrOpen = document.getElementById("qr-open");
   var qrModal = document.getElementById("qr-modal");
   var qrCloseButtons = document.querySelectorAll("[data-qr-close]");
-  var qrCloseIcon = qrModal && qrModal.querySelector(".qr-modal__close");
 
   function openQrModal() {
     if (!qrModal) {
       return;
     }
 
-    qrModal.hidden = false;
+    qrModal.classList.add("is-open");
+    qrModal.setAttribute("aria-hidden", "false");
     document.body.classList.add("qr-modal-open");
-
-    if (qrCloseIcon) {
-      qrCloseIcon.focus();
-    }
   }
 
   function closeQrModal() {
@@ -109,25 +134,20 @@
       return;
     }
 
-    qrModal.hidden = true;
+    qrModal.classList.remove("is-open");
+    qrModal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("qr-modal-open");
+  }
 
-    if (qrOpen) {
-      qrOpen.focus();
+  bindTap(qrOpen, openQrModal);
+
+  qrCloseButtons.forEach(function (button) {
+    bindTap(button, closeQrModal);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && qrModal && qrModal.classList.contains("is-open")) {
+      closeQrModal();
     }
-  }
-
-  if (qrOpen && qrModal) {
-    qrOpen.addEventListener("click", openQrModal);
-
-    qrCloseButtons.forEach(function (button) {
-      button.addEventListener("click", closeQrModal);
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !qrModal.hidden) {
-        closeQrModal();
-      }
-    });
-  }
+  });
 })();

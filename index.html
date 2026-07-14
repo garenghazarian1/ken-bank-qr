@@ -48,6 +48,7 @@
             alt=""
             width="80"
             height="80"
+            draggable="false"
           />
           <span class="qr-caption">Tap to enlarge</span>
         </button>
@@ -146,7 +147,14 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite" hidden>Copied</div>
 
-    <div class="qr-modal" id="qr-modal" hidden role="dialog" aria-modal="true" aria-label="QR code">
+    <div
+      class="qr-modal"
+      id="qr-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-label="QR code"
+    >
       <button type="button" class="qr-modal__backdrop" data-qr-close aria-label="Close"></button>
       <div class="qr-modal__panel">
         <button type="button" class="qr-modal__close" data-qr-close aria-label="Close">
@@ -158,6 +166,7 @@
           class="qr-modal__image"
           src="assets/images/qrCode.png"
           alt="QR code for this page"
+          draggable="false"
         />
         <p class="qr-modal__hint">Scan to open this page</p>
       </div>
