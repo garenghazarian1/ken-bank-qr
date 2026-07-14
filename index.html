@@ -8,12 +8,23 @@
       content="Thank you for celebrating with us. Wedding gift bank transfer details."
     />
     <meta name="theme-color" content="#faf6f0" />
+    <meta name="apple-mobile-web-app-title" content="Wedding Gift" />
+    <meta name="application-name" content="Wedding Gift" />
     <title>Wedding Gift · Viken Ghazarian</title>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -26,12 +37,15 @@
 
     <main class="page">
       <header class="hero">
+        <img
+          class="hero__logo"
+          src="assets/images/ring-logo.png"
+          alt=""
+          width="72"
+          height="72"
+          draggable="false"
+        />
         <p class="hero__eyebrow">With gratitude</p>
-        <div class="hero__ornament" aria-hidden="true">
-          <span class="hero__line"></span>
-          <span class="hero__diamond"></span>
-          <span class="hero__line"></span>
-        </div>
         <h1 class="hero__title">Thank You</h1>
         <p class="hero__message">
           Your presence on our special day means everything to us. If you wish
@@ -41,7 +55,12 @@
           With love, <span>Viken Ghazarian</span>
         </p>
 
-        <button type="button" class="qr-wrap" id="qr-open" aria-label="Enlarge QR code">
+        <button
+          type="button"
+          class="qr-wrap"
+          data-micromodal-trigger="qr-modal"
+          aria-haspopup="dialog"
+        >
           <img
             class="qr-code"
             src="assets/images/qrCode.png"
@@ -57,8 +76,9 @@
       <article class="glass-card" aria-label="Bank details">
         <button
           type="button"
-          class="copy-block copy-block--iban"
+          class="copy-block copy-block--iban copy-trigger"
           data-copy="iban"
+          data-copy-label="IBAN"
           aria-label="Copy IBAN"
         >
           <span class="copy-block__top">
@@ -78,8 +98,9 @@
           <li>
             <button
               type="button"
-              class="copy-row"
+              class="copy-row copy-trigger"
               data-copy="bank"
+              data-copy-label="Bank name"
               aria-label="Copy bank name"
             >
               <span class="label">Bank</span>
@@ -93,8 +114,9 @@
           <li>
             <button
               type="button"
-              class="copy-row"
+              class="copy-row copy-trigger"
               data-copy="holder"
+              data-copy-label="Account holder"
               aria-label="Copy account holder name"
             >
               <span class="label">Holder</span>
@@ -108,8 +130,9 @@
           <li>
             <button
               type="button"
-              class="copy-row"
+              class="copy-row copy-trigger"
               data-copy="account"
+              data-copy-label="Account number"
               aria-label="Copy account number"
             >
               <span class="label">Account</span>
@@ -123,8 +146,9 @@
           <li>
             <button
               type="button"
-              class="copy-row copy-row--last"
+              class="copy-row copy-row--last copy-trigger"
               data-copy="swift"
+              data-copy-label="SWIFT code"
               aria-label="Copy SWIFT code"
             >
               <span class="label">SWIFT</span>
@@ -145,33 +169,39 @@
       </article>
     </main>
 
-    <div class="toast" id="toast" role="status" aria-live="polite" hidden>Copied</div>
-
-    <div
-      class="qr-modal"
-      id="qr-modal"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-      aria-label="QR code"
-    >
-      <button type="button" class="qr-modal__backdrop" data-qr-close aria-label="Close"></button>
-      <div class="qr-modal__panel">
-        <button type="button" class="qr-modal__close" data-qr-close aria-label="Close">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-        <img
-          class="qr-modal__image"
-          src="assets/images/qrCode.png"
-          alt="QR code for this page"
-          draggable="false"
-        />
-        <p class="qr-modal__hint">Scan to open this page</p>
+    <div class="modal micromodal-slide" id="qr-modal" aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div
+          class="modal__container"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="qr-modal-title"
+        >
+          <button
+            type="button"
+            class="modal__close"
+            aria-label="Close"
+            data-micromodal-close
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+          <h2 id="qr-modal-title" class="modal__title">Scan QR Code</h2>
+          <img
+            class="modal__qr"
+            src="assets/images/qrCode.png"
+            alt="QR code for this page"
+            draggable="false"
+          />
+          <p class="modal__hint">Scan to open this page</p>
+        </div>
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/micromodal@0.4.10/dist/micromodal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
