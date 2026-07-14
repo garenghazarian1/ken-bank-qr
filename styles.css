@@ -30,9 +30,9 @@ html {
 
 body {
   margin: 0;
-  height: 100dvh;
-  max-height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: var(--font-body);
   font-size: clamp(0.8125rem, 1.6dvh, 0.9375rem);
   font-weight: 400;
@@ -82,12 +82,12 @@ body {
 
 .page {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
   gap: clamp(0.625rem, 1.8dvh, 1rem);
   width: 100%;
-  max-width: 28rem;
-  height: 100dvh;
-  max-height: 100dvh;
+  max-width: min(28rem, 100%);
+  min-height: 100dvh;
   margin: 0 auto;
   padding:
     max(var(--pad-y), env(safe-area-inset-top))
@@ -418,7 +418,7 @@ body.modal-open {
 .glass-card {
   display: flex;
   flex-direction: column;
-  min-height: 0;
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: clamp(0.875rem, 2dvh, 1.125rem);
@@ -439,7 +439,8 @@ body.modal-open {
   gap: 0 0.5rem;
   width: 100%;
   margin: 0;
-  padding: clamp(0.3125rem, 0.9dvh, 0.5rem) clamp(0.875rem, 2.5vw, 1.125rem);
+  padding: 0.625rem 1.125rem;
+  min-height: 2.75rem;
   border: none;
   border-bottom: 1px solid rgba(184, 149, 107, 0.1);
   background: transparent;
@@ -452,10 +453,10 @@ body.modal-open {
 }
 
 .copy-block {
-  display: block;
   grid-template-columns: unset;
+  display: block;
   flex-shrink: 0;
-  padding: clamp(0.625rem, 1.5dvh, 0.875rem) clamp(0.875rem, 2.5vw, 1.125rem);
+  padding: 0.875rem 1.125rem;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.55) 0%,
@@ -525,16 +526,15 @@ body.modal-open {
   list-style: none;
   margin: 0;
   padding: 0;
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
 }
 
 .detail-list li {
   margin: 0;
   padding: 0;
+}
+
+.detail-list .copy-row {
+  display: grid;
 }
 
 .label {
@@ -573,25 +573,24 @@ body.modal-open {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.375rem;
-  padding: clamp(0.5rem, 1.2dvh, 0.625rem) clamp(0.875rem, 2.5vw, 1.125rem);
+  padding: 0.625rem 1.125rem;
   border-top: 1px solid var(--surface-border);
   background: rgba(255, 255, 255, 0.35);
 }
 
-.tag {
-  padding: 0.125rem 0.5rem;
-  border-radius: 999px;
-  border: 1px solid rgba(184, 149, 107, 0.25);
-  background: rgba(255, 255, 255, 0.5);
-  font-size: clamp(0.5625rem, 1.05dvh, 0.625rem);
-  font-weight: 500;
-  color: var(--text-soft);
-}
+@media (hover: hover) and (pointer: fine) {
+  .copy-block:hover,
+  .copy-row:hover {
+    background: rgba(184, 149, 107, 0.08);
+  }
 
-.ref {
-  margin-left: auto;
-  font-size: clamp(0.625rem, 1.15dvh, 0.6875rem);
-  color: var(--text-soft);
+  .copy-block:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(240, 228, 210, 0.55) 100%
+    );
+  }
 }
 
 @media (min-width: 768px) {
@@ -599,6 +598,7 @@ body.modal-open {
     grid-template-columns: 1fr 1.05fr;
     grid-template-rows: 1fr;
     align-items: center;
+    align-content: center;
     gap: clamp(1rem, 3vw, 2rem);
     max-width: 52rem;
   }
@@ -616,15 +616,22 @@ body.modal-open {
   .hero__message {
     max-width: none;
   }
+}
 
-  .glass-card {
-    max-height: calc(100dvh - var(--pad-y) * 2 - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-  }
+.tag {
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 149, 107, 0.25);
+  background: rgba(255, 255, 255, 0.5);
+  font-size: clamp(0.5625rem, 1.05dvh, 0.625rem);
+  font-weight: 500;
+  color: var(--text-soft);
+}
 
-  .copy-block:hover,
-  .copy-row:hover {
-    background: rgba(184, 149, 107, 0.08);
-  }
+.ref {
+  margin-left: auto;
+  font-size: clamp(0.625rem, 1.15dvh, 0.6875rem);
+  color: var(--text-soft);
 }
 
 @media (max-height: 620px) {
