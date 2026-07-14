@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Thank you for celebrating with us. Wedding gift bank transfer details."
+    />
+    <meta name="theme-color" content="#faf6f0" />
+    <title>Wedding Gift · Viken Ghazarian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true">
+      <div class="backdrop__glow backdrop__glow--one"></div>
+      <div class="backdrop__glow backdrop__glow--two"></div>
+      <div class="backdrop__grain"></div>
+    </div>
+
+    <main class="page">
+      <header class="hero">
+        <p class="hero__eyebrow">With gratitude</p>
+        <div class="hero__ornament" aria-hidden="true">
+          <span class="hero__line"></span>
+          <span class="hero__diamond"></span>
+          <span class="hero__line"></span>
+        </div>
+        <h1 class="hero__title">Thank You</h1>
+        <p class="hero__message">
+          Your presence on our special day means everything to us. If you wish
+          to share a gift, transfer to the account below.
+        </p>
+        <p class="hero__signoff">
+          With love, <span>Viken Ghazarian</span>
+        </p>
+
+        <div
+          class="qr-wrap"
+          id="qr-wrap"
+          data-qr-url=""
+          title="QR code links to this page"
+        >
+          <canvas id="qr-canvas" class="qr-code" aria-label="QR code for this page"></canvas>
+          <p class="qr-caption">Scan to share</p>
+        </div>
+      </header>
+
+      <article class="glass-card" aria-label="Bank details">
+        <button
+          type="button"
+          class="copy-block copy-block--iban"
+          data-copy="iban"
+          aria-label="Copy IBAN"
+        >
+          <span class="copy-block__top">
+            <span class="label">IBAN</span>
+            <span class="copy-hint">
+              <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              <span class="copy-hint__label">Tap to copy</span>
+            </span>
+          </span>
+          <span class="copy-block__value" id="iban">AE900351091004611038002</span>
+        </button>
+
+        <ul class="detail-list">
+          <li>
+            <button
+              type="button"
+              class="copy-row"
+              data-copy="bank"
+              aria-label="Copy bank name"
+            >
+              <span class="label">Bank</span>
+              <span class="value" id="bank">First Abu Dhabi Bank PJSC</span>
+              <svg class="copy-icon copy-row__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="copy-row"
+              data-copy="holder"
+              aria-label="Copy account holder name"
+            >
+              <span class="label">Holder</span>
+              <span class="value" id="holder">VIKEN GHAZARIAN</span>
+              <svg class="copy-icon copy-row__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="copy-row"
+              data-copy="account"
+              aria-label="Copy account number"
+            >
+              <span class="label">Account</span>
+              <span class="value value--mono" id="account">1091004611038002</span>
+              <svg class="copy-icon copy-row__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="copy-row copy-row--last"
+              data-copy="swift"
+              aria-label="Copy SWIFT code"
+            >
+              <span class="label">SWIFT</span>
+              <span class="value value--mono" id="swift">NBADAEAAXXX</span>
+              <svg class="copy-icon copy-row__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </li>
+        </ul>
+
+        <footer class="glass-card__footer">
+          <span class="tag">Current account</span>
+          <span class="tag">AED</span>
+          <span class="ref">Ref: Wedding gift</span>
+        </footer>
+      </article>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>Copied</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+    <script src="qr.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
