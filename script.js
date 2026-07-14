@@ -85,4 +85,49 @@
       });
     });
   });
+
+  var qrOpen = document.getElementById("qr-open");
+  var qrModal = document.getElementById("qr-modal");
+  var qrCloseButtons = document.querySelectorAll("[data-qr-close]");
+  var qrCloseIcon = qrModal && qrModal.querySelector(".qr-modal__close");
+
+  function openQrModal() {
+    if (!qrModal) {
+      return;
+    }
+
+    qrModal.hidden = false;
+    document.body.classList.add("qr-modal-open");
+
+    if (qrCloseIcon) {
+      qrCloseIcon.focus();
+    }
+  }
+
+  function closeQrModal() {
+    if (!qrModal) {
+      return;
+    }
+
+    qrModal.hidden = true;
+    document.body.classList.remove("qr-modal-open");
+
+    if (qrOpen) {
+      qrOpen.focus();
+    }
+  }
+
+  if (qrOpen && qrModal) {
+    qrOpen.addEventListener("click", openQrModal);
+
+    qrCloseButtons.forEach(function (button) {
+      button.addEventListener("click", closeQrModal);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !qrModal.hidden) {
+        closeQrModal();
+      }
+    });
+  }
 })();

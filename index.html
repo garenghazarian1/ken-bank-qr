@@ -41,15 +41,16 @@
           With love, <span>Viken Ghazarian</span>
         </p>
 
-        <div
-          class="qr-wrap"
-          id="qr-wrap"
-          data-qr-url=""
-          title="QR code links to this page"
-        >
-          <canvas id="qr-canvas" class="qr-code" aria-label="QR code for this page"></canvas>
-          <p class="qr-caption">Scan to share</p>
-        </div>
+        <button type="button" class="qr-wrap" id="qr-open" aria-label="Enlarge QR code">
+          <img
+            class="qr-code"
+            src="assets/images/qrCode.png"
+            alt=""
+            width="80"
+            height="80"
+          />
+          <span class="qr-caption">Tap to enlarge</span>
+        </button>
       </header>
 
       <article class="glass-card" aria-label="Bank details">
@@ -145,8 +146,23 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite" hidden>Copied</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
-    <script src="qr.js"></script>
+    <div class="qr-modal" id="qr-modal" hidden role="dialog" aria-modal="true" aria-label="QR code">
+      <button type="button" class="qr-modal__backdrop" data-qr-close aria-label="Close"></button>
+      <div class="qr-modal__panel">
+        <button type="button" class="qr-modal__close" data-qr-close aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+        <img
+          class="qr-modal__image"
+          src="assets/images/qrCode.png"
+          alt="QR code for this page"
+        />
+        <p class="qr-modal__hint">Scan to open this page</p>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
